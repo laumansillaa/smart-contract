@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.containCard {
+    margin-bottom: 2rem;
+    display: grid;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+    /* background: yellow; */
+    /* padding-left: 5rem; */
+}
+
+.card {
+    border: 2px solid black;
+    /* box-shadow: 60px -16px teal; */
+    margin-bottom: .8rem;
+
+
+}
+
+.card-title {
+    text-align: center;
+    font-family: Roboto;
+    font-size: 8rem;
+}
+
+.card-subtitle{
+    text-align: start;
+    font-family: 'Roboto', sans-serif;
+
+}
