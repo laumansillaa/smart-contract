@@ -3,6 +3,7 @@ import { Box, Container, Button, Card, CardContent, Typography, TextField} from 
 import { ethers } from "ethers";
 import abi from "./utils/WavePortal.json";
 import { smartContractAddress } from "./address.js";
+import LandingPage from './components/landingPage/landingPage.jsx'
 import "./App.css";
 import './styles/card.css';
 import './styles/search.css'
@@ -105,6 +106,7 @@ function App() {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner();
+        console.log('SIGNER', signer)
         const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer) 
 
         //call the getAllWaves method 
@@ -134,77 +136,85 @@ function App() {
 
   useEffect(() => {
     checkIfWalletIsConnected();
-  }, [countWave]);
+  }, [countWave, currentAccount]);
 
 
 
   return (
-    <Container className="App">
-      <Box 
-        className='wallet-nav'
-      >
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/256px-Ethereum_logo_2014.svg.png"
-          alt="Ethereum-logo"
-          className='img-nav'
-        />
-        <Box className='wallet-contain-button'>
-          {/* If there is no currentAccount render this button */}
-          {!currentAccount? 
-            <>              
-              <h3 
-                className='wallet-nav-title'
-              >Hey you still haven't connected your wallet!</h3>
-              <Button 
-                variant="contained"
-                onClick={connectWallet}
-                sx={{ml: 2, mr:2}}
-              >Connect Wallet
-              </Button>
-            </> :
+    <Container className="App"> 
+      <Box className='wallet-nav'>
+        <Box>
+          <img 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Ethereum_logo_2014.svg/256px-Ethereum_logo_2014.svg.png"
+            alt="Ethereum-logo"
+            className='img-nav'
+          />
+        </Box>
+        <Box>
+          <h3 className='wallet-nav-title'
+          >Hi! Welcome to my first smart-contract</h3>
+        </Box>
+      </Box>
+      <Box>
+        {
+          !currentAccount ? 
             <>
-              <h3 className='wallet-nav-title'>Yes now! Very well, you are now connected.</h3>
+              <Box>
+                <Box className='wallet-contain-button'>
+                    {/* If there is no currentAccount render this button */} 
+                    <h3 className='wallet-nav-title'>Hey you still haven't connected your wallet!</h3>
+                    <Box>
+                    <Button 
+                        variant="contained"
+                        onClick={connectWallet}
+                        sx={{ml: 2, mr:2, width: 250}}
+                    >Connect Wallet
+                    </Button>
+                    </Box>        
+                </Box>
+              </Box>
             </>
-          }
-        </Box>
-      </Box>
-      <Box 
-        className='contain-body'
-        
-        >
-        <h1
-          className='body-title'
-        >Hi! Welcome to my first smart-contract</h1>
-        <Button 
-          variant="contained" 
-          disableElevation 
-          onClick={wave}
-          sx={{mb: 2}}
-          >
-          Send me a wave
-        </Button>
-      </Box>
-      <Box className='contain-search' >
-        <Box>
-          <h3 className='count-wave'>Retrieved total wave count: {countWave}</h3>
-        </Box>
-        <Box>
-          <TextField label='Insert you Address' variant='outlined' className='search'/>
-        </Box>
-      </Box>
-      <Box className='containCard'>
-        {allWaves.map((wave, index) => {
-          return (
-            <Card key={index} sx={{width:600}} className='card'>
-              <CardContent>
-                <Typography sx={{ fontSize: 20 }} className='card-title'>New message!</Typography>
-                <Typography color="text.secondary" className='card-subtitle'>Address: {wave.address}</Typography>
-                <Typography color="text.secondary" className='card-subtitle'>Time: {wave.timestamp.toString()}</Typography>
-                <Typography className='card-subtitle'>Message: {wave.message}</Typography>
-              </CardContent>
-            </Card>
-          )
-        })}
+            :
+            <>
+              <Box className='contain-body'>
+                <h1
+                  className='body-title'
+                >Yes now! Very well, you are now connected.</h1>
+                <Button 
+                  variant="contained" 
+                  disableElevation 
+                  onClick={wave}
+                  sx={{mb: 2}}
+                  >
+                  Send me a wave
+                </Button>
+              </Box>
+              <Box>
+                <Box className='contain-search' >
+                    <Box>
+                      <h3 className='count-wave'>Retrieved total wave count: {countWave}</h3>
+                    </Box>
+                    <Box>
+                      <TextField label='Insert you Address' variant='outlined' className='search'/>
+                    </Box>
+                </Box>
+                <Box className='containCard'>
+                  {allWaves.map((wave, index) => {
+                    return (
+                      <Card key={index} sx={{width:600}} className='card'>
+                        <CardContent>
+                          <Typography sx={{ fontSize: 20 }} className='card-title'>New message!</Typography>
+                          <Typography color="text.secondary" className='card-subtitle'>Address: {wave.address}</Typography>
+                          <Typography color="text.secondary" className='card-subtitle'>Time: {wave.timestamp.toString()}</Typography>
+                          <Typography className='card-subtitle'>Message: {wave.message}</Typography>
+                        </CardContent>
+                      </Card>
+                    )
+                  })}
+                </Box>
+              </Box>
+            </>
+        }
       </Box>
     </Container>
   );

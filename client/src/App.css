@@ -1,21 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 
 #root {
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
-  background: #FBF7F4;
-
-  width: 100%;
-  height: 100%;
+  padding: 0;
+  min-width: 100%;
+  min-height: 100%;
 
 }
 
 .App {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  background: #6C9A8B;
-
+  min-width: 100%;
+  min-height: 100%;
+  padding-left: 0;
 
 }
 
@@ -30,17 +27,16 @@
 	flex-wrap: nowrap;
 	justify-content: space-around;
 	align-items: center;
-  background: #FBF7F4;
-  border: 1px solid grey;
   padding-top: 1rem;
   padding-bottom: 1rem;
   width: 100%;
-}
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);}
 
 .wallet-nav-title {
-  color: #000000;
+  color: #fafafa;
   font-family: Staatliches;
   font-size: 2.5rem;
+  letter-spacing: 2px;
 }
 
 .wallet-contain-button {
@@ -50,24 +46,26 @@
 	justify-content: center;
 }
 
+
+
 .contain-body {
-  background: #6C9A8B;
   width: 100%;
-  /* height: 580px; */
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
 }
 
 .body-title {
   font-family: Staatliches;
-  ;
+  letter-spacing: 2px;
+  color: #fafafa;
 }
 
 
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* @media screen and (min-widht: 600px) {
+  .App {
+      padding-left: 0;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */

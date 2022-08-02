@@ -6,15 +6,12 @@
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: center;
-    /* background: yellow; */
-    /* padding-left: 5rem; */
+
 }
 
 .card {
     border: 2px solid black;
-    /* box-shadow: 60px -16px teal; */
     margin-bottom: .8rem;
-
 
 }
 
