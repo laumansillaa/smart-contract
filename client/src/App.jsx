@@ -15,6 +15,7 @@ function App() {
   const [message, setMessage] = useState('')
   
   const contractAddress = smartContractAddress;
+  //Interfaz binaria de aplicacion de Contrato
   const contractABI = abi.abi;
   // console.log('COUNTWAVE', countWave)
 
@@ -81,7 +82,11 @@ function App() {
         let count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
-        const waveTxn = await wavePortalContract.wave(message.length ? message : "A mysterious visitor was here");
+        const waveTxn = await wavePortalContract.wave(message.length ? message : "A mysterious visitor was here", {gasLimit: 300000}); 
+        // Esto lo que hace es que el usuario pague una cantidad fija de gas de 300.000. 
+        // Y, si no lo usan todo en la transacción, se les reembolsará automáticamente. 
+        // Por lo tanto, si una transacción cuesta 250 000 de gasolina, luego de que se finalice la transacción, 
+        // se reembolsarán los 50 000 de gasolina sobrantes que el usuario no usó :).
         console.log('Mining...', waveTxn.hash)
 
         await waveTxn.wait();
@@ -89,6 +94,7 @@ function App() {
 
         count = await wavePortalContract.getTotalWaves()
         setCountWave(count.toNumber())
+        setMessage('')
         
         console.log('Retrieved total wave count...', count.toNumber())
 
@@ -106,7 +112,7 @@ function App() {
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum)
         const signer = provider.getSigner();
-        console.log('SIGNER', signer)
+        // console.log('SIGNER', signer)
         const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer) 
 
         //call the getAllWaves method 
